@@ -1,0 +1,28 @@
+models:
+  - name: stg_faker_users
+    columns:
+      - name: id
+        description: Unique id for a user
+        tests:
+          - unique
+          - not_null
+      - name: gender
+        description: Sex of the user
+        tests:
+          - accepted_values:
+              values: ['Female', 'Male']
+  - name: stg_faker_products
+    columns:
+      - name: id
+        description: Unique id for a product
+        tests:
+          - unique
+          - not_null
+  - name: stg_faker_purchases
+    columns:
+      - name: user_id
+        description: Unique id for a user should exist in users table
+        tests:
+          - relationships:
+              to: ref('stg_faker_users')
+              field: id
